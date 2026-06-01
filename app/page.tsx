@@ -10,7 +10,7 @@ export default async function Page() {
   })
 
   if (session) {
-    redirect("/remember")
+    redirect("/home")
   }
 
   return (
