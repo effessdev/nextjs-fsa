@@ -9,7 +9,7 @@ import SignInWithGitHub from "@/components/ui/sign-in-with-github"
 
 export default function SignInPage() {
   return (
-    <div className="flex h-dvh w-full flex-col items-center justify-center p-4">
+    <div className="flex min-h-dvh w-full flex-col items-center justify-center p-4">
       <Card className="min-w-sm">
         <CardHeader>
           <CardTitle>Sign in</CardTitle>

@@ -29,7 +29,7 @@ export default function SignOutPage() {
   }, [router])
 
   return (
-    <div className="flex h-dvh w-full items-center justify-center">
+    <div className="flex min-h-dvh w-full items-center justify-center">
       {message === "" ? <Spinner /> : <p className="text-center">{message}</p>}
     </div>
   )

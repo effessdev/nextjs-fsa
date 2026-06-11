@@ -11,7 +11,7 @@ import Link from "next/link"
 
 export default async function Page() {
   return (
-    <div className="flex h-dvh w-full flex-col items-center justify-center gap-4 p-4">
+    <div className="flex min-h-dvh w-full flex-col items-center justify-center gap-4 p-4">
       <Card>
         <CardHeader>
           <CardTitle>Landing Page</CardTitle>
