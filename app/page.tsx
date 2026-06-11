@@ -1,24 +1,36 @@
 import { Button } from "@/components/ui/button"
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import Link from "next/link"
-import { redirect } from "next/navigation"
 
 export default async function Page() {
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  })
-
-  if (session) {
-    redirect("/home")
-  }
-
   return (
-    <div>
-      <p>Landing Page</p>
-      <Link href="/sign-in">
-        <Button variant="link">Sign In</Button>
-      </Link>
+    <div className="flex h-dvh w-full flex-col items-center justify-center gap-4 p-4">
+      <Card>
+        <CardHeader>
+          <CardTitle>Landing Page</CardTitle>
+          <CardDescription>
+            This is the landing page of this website.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p>
+            You can sign in to this website if you want. Just click the button
+            below.
+          </p>
+        </CardContent>
+        <CardFooter>
+          <Button asChild>
+            <Link href="/sign-in">Sign In</Link>
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   )
 }

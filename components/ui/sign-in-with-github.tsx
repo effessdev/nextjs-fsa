@@ -18,8 +18,8 @@ export default function SignInWithGitHub() {
       await authClient.signIn.social({
         provider: "github",
         callbackURL: "/home",
-        errorCallbackURL: "/error",
-        newUserCallbackURL: "/welcome",
+        errorCallbackURL: "/sign-in?failed=1",
+        newUserCallbackURL: "/home?newUser=1",
         disableRedirect: false,
       })
     } catch (err) {
@@ -30,12 +30,7 @@ export default function SignInWithGitHub() {
   }
 
   return (
-    <Button
-      className="w-full"
-      onClick={handleClick}
-      variant="outline"
-      disabled={showLoading}
-    >
+    <Button onClick={handleClick} disabled={showLoading}>
       <SiGithub />
       Sign in with GitHub
       <Spinner className={cn(!showLoading && "hidden")} />
