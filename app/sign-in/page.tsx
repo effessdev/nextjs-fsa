@@ -5,8 +5,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import SignInWithGitHub from "@/components/ui/sign-in-with-github"
+import SocialSignInBtn from "@/components/ui/social-sign-in-btn"
 import { auth } from "@/lib/auth"
+import { SiGithub } from "react-icons/si"
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 
@@ -27,7 +28,10 @@ export default async function SignInPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <SignInWithGitHub />
+          <SocialSignInBtn provider="github">
+            <SiGithub />
+            Sign In with GitHub
+          </SocialSignInBtn>
         </CardContent>
       </Card>
     </div>
