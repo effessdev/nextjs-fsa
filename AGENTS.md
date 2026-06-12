@@ -12,7 +12,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 - Only create custom components if a corresponding shadcn/ui component does not exist. You can add them using the command `pnpm dlx shadcn@latest add <component-name>`.
 - Use semantic color tokens (defined in `@/app/globals.css`) instead of hardcoded Tailwind colors.
-- Do not edit `@/db/schema/auth-schema.ts`. If you want to create a new schema, create a new file in `@/db/schema/` folder, or use an already existing file in `@/db/schema/` folder **which is not `auth-schema.ts`**.
+- Do not edit `@/db/schema/auth-schema.ts`. If you want to create a new schema, create a new file in `@/db/schema/` folder, or use an already existing file in `@/db/schema/` folder **which is not `auth-schema.ts`**. If you are creating a new schema file, remember to add the line `export * from "./<filename>"` in the `@/db/schema/index.ts` file.
 - If you want an item (like a sign in form) in the middle of the screen, instead of `min-h-screen` in the parent container, use `min-h-dvh` as using `min-h-screen` will cause issues with mobile browsers.
 
 ## Style guide
@@ -49,10 +49,10 @@ export function User(){
 
 ## Querying the database
 
-This can be done using the Drizzle instance `db` from `@/db/db`. For example:
+This can be done using the Drizzle instance `db` from `@/db`. For example:
 
 ```ts
-import db from "@/db/db"
+import db from "@/db"
 const result = await db.select().from(myTable)
 ```
 
