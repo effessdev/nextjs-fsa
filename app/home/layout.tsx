@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/navbar"
 import { Button } from "@/components/ui/button"
+import { ModeToggle } from "@/components/ui/mode-toggle"
 import Link from "next/link"
 
 export default function HomeLayout({
@@ -27,9 +28,12 @@ export default function HomeLayout({
           },
         ]}
         actions={
-          <Button variant="outline" asChild>
-            <Link href="sign-out">Sign Out</Link>
-          </Button>
+          <div className="flex gap-2">
+            <ModeToggle />
+            <Button variant="outline" asChild>
+              <Link href="sign-out">Sign Out</Link>
+            </Button>
+          </div>
         }
         sticky
       />
