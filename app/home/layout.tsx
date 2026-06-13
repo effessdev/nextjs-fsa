@@ -1,9 +1,4 @@
-import {
-  Navbar,
-  NavbarActions,
-  NavbarBrand,
-  NavbarContent,
-} from "@/components/layout/navbar"
+import { Navbar } from "@/components/layout/navbar"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -14,26 +9,30 @@ export default function HomeLayout({
 }) {
   return (
     <>
-      <Navbar sticky>
-        <NavbarBrand>
-          <Link href="/">Brand Icon</Link>
-        </NavbarBrand>
-        <NavbarContent
-          content={[
-            { label: "Dummy Link", link: "/" },
-            {
-              label: "Dummy Dropdown",
-              items: [
-                { label: "Item 1", link: "/" },
-                { label: "Item 2", link: "/" },
-              ],
-            },
-          ]}
-        />
-        <NavbarActions>
-          <Button variant="secondary">Dummy</Button>
-        </NavbarActions>
-      </Navbar>
+      <Navbar
+        brand={
+          <Link href="/" className="text-lg font-bold">
+            fsa
+          </Link>
+        }
+        links={[
+          { label: "Link 1", link: "/" },
+          { label: "Link 2", link: "/" },
+          {
+            label: "Dropdown 1",
+            items: [
+              { label: "Sub Link 1", link: "/" },
+              { label: "Sub Link 2", link: "/" },
+            ],
+          },
+        ]}
+        actions={
+          <Button variant="outline" asChild>
+            <Link href="sign-out">Sign Out</Link>
+          </Button>
+        }
+        sticky
+      />
       {children}
     </>
   )
