@@ -21,13 +21,16 @@ export default async function Page() {
         </CardHeader>
         <CardContent>
           <p>
-            You can sign in to this website if you want. Click the button below
-            to go to the sign in page.
+            Click the button below to go to the sign in page, or directly go to
+            home if you are already signed in.
           </p>
         </CardContent>
-        <CardFooter>
-          <Button asChild>
+        <CardFooter className="gap-2">
+          <Button variant="outline" asChild>
             <Link href="/sign-in">Go to Sign In</Link>
+          </Button>
+          <Button asChild>
+            <Link href="/home">Go to Home</Link>
           </Button>
         </CardFooter>
       </Card>
