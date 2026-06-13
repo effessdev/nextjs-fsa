@@ -30,9 +30,25 @@ export type NavbarDropdownItem = {
 
 export type NavbarItem = NavbarLinkItem | NavbarDropdownItem
 
-type Breakpoint = "sm" | "md" | "lg" | "xl" | "2xl"
+function isDropdownItem(item: NavbarItem): item is NavbarDropdownItem {
+  return "items" in item
+}
 
-const desktopClasses: Record<Breakpoint, string> = {
+interface NavbarContextValue {
+  mobileBreakpoint: "sm" | "md" | "lg" | "xl" | "2xl"
+}
+
+const NavbarContext = React.createContext<NavbarContextValue | null>(null)
+
+const mobileClasses: Record<NavbarContextValue["mobileBreakpoint"], string> = {
+  sm: "flex sm:hidden",
+  md: "flex md:hidden",
+  lg: "flex lg:hidden",
+  xl: "flex xl:hidden",
+  "2xl": "flex 2xl:hidden",
+}
+
+const desktopClasses: Record<NavbarContextValue["mobileBreakpoint"], string> = {
   sm: "sm:flex",
   md: "md:flex",
   lg: "lg:flex",
@@ -40,24 +56,8 @@ const desktopClasses: Record<Breakpoint, string> = {
   "2xl": "2xl:flex",
 }
 
-const mobileClasses: Record<Breakpoint, string> = {
-  sm: "sm:hidden",
-  md: "md:hidden",
-  lg: "lg:hidden",
-  xl: "xl:hidden",
-  "2xl": "2xl:hidden",
-}
-
-const NavbarContext = React.createContext<{
-  mobileBreakpoint: Breakpoint
-} | null>(null)
-
-function isDropdownItem(item: NavbarItem): item is NavbarDropdownItem {
-  return "items" in item
-}
-
 interface NavbarProps extends React.ComponentProps<"header"> {
-  mobileBreakpoint?: Breakpoint
+  mobileBreakpoint?: "sm" | "md" | "lg" | "xl" | "2xl"
   sticky?: boolean
 }
 
@@ -126,7 +126,7 @@ function Navbar({
 function NavbarBrand({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      className={cn("flex shrink-0 items-center gap-2", className)}
+      className={cn("flex shrink-0 items-center gap-2 pr-4", className)}
       {...props}
     />
   )
@@ -145,7 +145,7 @@ function NavbarContent({ content, className }: NavbarContentProps) {
   return (
     <>
       {/* Mobile */}
-      <div className={cn("shrink-0", mobileClasses[breakpoint])}>
+      <div className={cn("mr-auto shrink-0", mobileClasses[breakpoint])}>
         <Drawer direction="left">
           <DrawerTrigger asChild>
             <Button variant="ghost" size="icon">
@@ -160,7 +160,7 @@ function NavbarContent({ content, className }: NavbarContentProps) {
                 if (isDropdownItem(item)) {
                   return (
                     <div key={item.label} className="flex flex-col">
-                      <h4 className="px-3 py-2 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                      <h4 className="py-2 pl-3 font-bold text-muted-foreground">
                         {item.label}
                       </h4>
 
@@ -169,7 +169,7 @@ function NavbarContent({ content, className }: NavbarContentProps) {
                           <Link
                             key={subItem.link}
                             href={subItem.link}
-                            className="rounded-md px-3 py-2 text-sm hover:bg-accent"
+                            className="py-2 pl-3 hover:text-primary"
                           >
                             {subItem.label}
                           </Link>
@@ -183,7 +183,7 @@ function NavbarContent({ content, className }: NavbarContentProps) {
                   <Link
                     key={item.link}
                     href={item.link}
-                    className="rounded-md px-3 py-2 text-sm hover:bg-accent"
+                    className="py-2 pl-3 hover:text-primary"
                   >
                     {item.label}
                   </Link>
@@ -197,7 +197,7 @@ function NavbarContent({ content, className }: NavbarContentProps) {
       {/* Desktop */}
       <nav
         className={cn(
-          "hidden flex-1 justify-center",
+          "hidden flex-1 justify-start",
           desktopClasses[breakpoint],
           className
         )}
