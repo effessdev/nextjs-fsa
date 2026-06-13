@@ -211,7 +211,7 @@ function NavbarContent({ content, className }: NavbarContentProps) {
                     <NavigationMenuTrigger>{item.label}</NavigationMenuTrigger>
 
                     <NavigationMenuContent>
-                      <ul className="grid min-w-[220px] gap-1 p-2">
+                      <ul className="grid min-w-55 gap-1 p-2">
                         {item.items.map((subItem) => (
                           <li key={subItem.link}>
                             <NavigationMenuLink asChild>
